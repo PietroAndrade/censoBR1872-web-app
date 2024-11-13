@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  db:
+    build: .
+    container_name: postgres-censo-1872
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: minhasenha
+  volumes:
+    postgres-data:
