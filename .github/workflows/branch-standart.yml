@@ -1,0 +1,22 @@
+name: Branch standart validation
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  validate-branch-name:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine/git:latest
+    steps:
+      - name: Install bash for regex
+        run: apk add --no-cache bash
+      - name: Check branch name
+        run: |
+          if [[ ! "GITHUB_HEAD_REF" =~ ^(feature|bugfix|realease|env)/CWA-[0-9]+$ ]]: then
+            echo "❌ Branch name does not follow the required pattern '<branch type>/CSA-<number>'."
+            echo "Accepted types: feature, bugfix, release, env."
+            exit 1
+          fi
+          echo "✅ Branch name is valid!"
