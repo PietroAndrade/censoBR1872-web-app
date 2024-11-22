@@ -1,9 +1,11 @@
 name: Branch standart validation
 
 on:
-  pull_request:
-    branches:
-      - main
+  pull_request: # Escutando eventos relacionados a PRs
+    types:
+      - opened       # Quando a PR for aberta
+      - synchronize  # Quando commits forem adicionados na PR (atualização)
+      - reopened  
 jobs:
   validate-branch-name:
     runs-on: ubuntu-latest
