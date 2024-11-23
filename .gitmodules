@@ -1,0 +1,3 @@
+[submodule "censo-data-analysis"]
+	path = censo-data-analysis
+	url = git@github.com:filipedelima/censo_1872.git

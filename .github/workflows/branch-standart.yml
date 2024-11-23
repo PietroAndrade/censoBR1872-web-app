@@ -12,13 +12,11 @@ jobs:
     container:
       image: alpine/git:latest
     steps:
-      - name: Install bash for regex
-        run: apk add --no-cache bash
-      - name: Check branch name
-        run: |
-          if [[ ! "GITHUB_HEAD_REF" =~ ^(feature|bugfix|realease|env)/CWA-[0-9]+$ ]]: then
-            echo "❌ Branch name does not follow the required pattern '<branch type>/CSA-<number>'."
-            echo "Accepted types: feature, bugfix, release, env."
-            exit 1
-          fi
-          echo "✅ Branch name is valid!"
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Make script executable
+        run: chmod +x ./validate-branch.sh
+      
+      - name: Run script from file
+        run: ./validate-branch.sh

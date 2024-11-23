@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  db:
+    build:
+    context: .
+    dockerfile: Dockerfile
+    container_name: postgres-censo-1872
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: minhasenha
+  volumes:
+    postgres-data:
